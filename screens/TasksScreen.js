@@ -11,8 +11,26 @@ const TasksScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { tasks } = useSelector(state => state.tasks);
-  const pendingTasks = tasks.filter(task => !task.isCompleted);
+  const pendingTasks = tasks
+    .filter(task => !task.isCompleted)
+    .map(task => {
+      let quadrant = 1; //1,2,3
+      if(task.isImp && task.isUrgent){
+        quadrant = 1;
+      } else if(task.isImp && !task.isUrgent){
+        quadrant = 2;
+      } else if(!task.isImp && task.isUrgent){
+        quadrant = 3;
+      } else {
+        quadrant = 4;
+      }
+      return {
+        ...task,
+        quadrant
+      }
+    });
 
+    pendingTasks.sort((taskA,taskB) => taskA.quadrant < taskB.quadrant ? -1 : 1);
 
   useEffect(() => {
     retriveData('tasks')
