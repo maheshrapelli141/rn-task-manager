@@ -6,6 +6,7 @@ import TaskItem from '../components/TaskItem';
 import { deleteTaskAction } from '../redux/actions/task.actions';
 import NoCompleteTasks from '../assets/no-completed-tasks.svg';
 import { useNavigation } from '@react-navigation/native';
+import MyText from '../components/MyText';
 
 const CompletedTasksScreen = () => {
   const navigation = useNavigation();
@@ -49,7 +50,7 @@ const CompletedTasksScreen = () => {
           />)
         :
         <View style={{marginTop: 100,justifyContent: 'center',display: 'flex',alignItems:'center',paddingTop: 18}}>
-          <Text style={{width:250,fontSize: 20,textAlign: 'center'}}>Finished tasks appear here!</Text>
+          <MyText style={{width:250,fontSize: 20,textAlign: 'center'}}>Finished tasks appear here!</MyText>
           <NoCompleteTasks width={160} height={200} style={{margin:50}}/>
           <Button onPress={() => navigation.navigate('To Do - Tasks')}>Show Tasks</Button>
         </View>}

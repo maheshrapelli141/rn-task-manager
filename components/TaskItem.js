@@ -6,16 +6,20 @@ import { markTaskAsCompletedAction } from '../redux/actions/task.actions';
 import ImportantBadge from './ImportantBadge';
 import UrgentBadge from './UrgentBadge';
 
+
 const TaskItem = ({ type, name ,description, isImp,isUrgent,id }) => {
   const dispatch = useDispatch();
 
   return (
     <List.Accordion
       title={name}
+      titleStyle={{
+        fontSize:20
+      }}
       id={id || Math.random()}
       style={{ display: 'flex' }}
       // left={() =>   <Avatar.Text size={36} label="XD" />}
-      right={() => <View>
+      left={() => <View>
         {isImp && <ImportantBadge />}
         {isUrgent && <UrgentBadge />}
       </View>}

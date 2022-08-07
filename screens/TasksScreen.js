@@ -8,6 +8,7 @@ import { retriveData } from '../helpers/AsyncStorageHandler';
 import { setTasksAction } from '../redux/actions/task.actions';
 import CreateTaskSvg from '../assets/create-project.svg';
 import { SvgUri } from 'react-native-svg';
+import MyText from '../components/MyText';
 
 const TasksScreen = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const TasksScreen = () => {
           />)
         :
         <View style={{marginTop: 100,justifyContent: 'center',display: 'flex',alignItems:'center',paddingTop: 18}}>
-          <Text style={{width:250,fontSize: 20,textAlign: 'center'}}>Now Manage Tasks more efficients</Text>
+          <MyText style={{width:250,fontSize: 20,textAlign: 'center'}}>Now Manage Tasks more efficients</MyText>
           <CreateTaskSvg width={160} height={200} style={{margin:50}}/>
           <Button onPress={() => navigation.navigate('Create Task')}>Create Tasks</Button>
         </View>

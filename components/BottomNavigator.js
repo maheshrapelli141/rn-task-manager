@@ -16,8 +16,15 @@ const BottomNavigator = () => {
         tabBarLabel: "Tasks",
         tabBarIcon: ({ color, size }) => (
           <Ionicons name="list-outline" color={color} size={size} />
-        )
-      }} />
+        ),
+        tabBarLabelStyle: {
+          fontFamily: 'TiroGurmukhi_Regular'
+        },
+        headerTitleStyle: {
+          fontFamily: 'TiroGurmukhi_Regular'
+        }
+      }} 
+      />
 
     <BottomTab.Screen
       name="Create Task"
@@ -25,7 +32,14 @@ const BottomNavigator = () => {
       options={{
         tabBarLabel: "Create",
         tabBarIcon: ({ color, size }) =>
-          <Ionicons name="create-outline" color={color} size={size} />
+          <Ionicons name="create-outline" color={color} size={size} 
+        />,
+        tabBarLabelStyle: {
+          fontFamily: 'TiroGurmukhi_Regular'
+        },
+        headerTitleStyle: {
+          fontFamily: 'TiroGurmukhi_Regular'
+        }
       }} />
     <BottomTab.Screen
       name="Completed Tasks"
@@ -33,7 +47,13 @@ const BottomNavigator = () => {
       options={{
         tabBarLabel: "Completed",
         tabBarIcon: ({ color, size }) =>
-          <Ionicons name="trophy-outline" color={color} size={size} />
+          <Ionicons name="trophy-outline" color={color} size={size} />,
+        tabBarLabelStyle: {
+          fontFamily: 'TiroGurmukhi_Regular'
+        },
+        headerTitleStyle: {
+          fontFamily: 'TiroGurmukhi_Regular'
+        }
       }} />
   </BottomTab.Navigator>
 };

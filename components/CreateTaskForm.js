@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Button, Checkbox, Chip, Divider, Text, TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { createTaskAction } from '../redux/actions/task.actions';
+import MyText from './MyText';
 
 const CreateTaskForm = () => {
   const navigation = useNavigation();
@@ -30,7 +31,7 @@ const CreateTaskForm = () => {
 
   return (
     <View style={{padding: 20,marginTop: 50}}>
-      <Text style={{fontSize:24,marginBottom: 10}}>Add Task</Text>
+      <MyText style={{fontSize:24,marginBottom: 10}}>Add Task</MyText>
       <Divider />
       <TextInput
         label="Task Name"
@@ -42,7 +43,8 @@ const CreateTaskForm = () => {
         })}
         right={<TextInput.Icon name="pencil-outline" />}
         style={{
-          marginTop: 10
+          marginTop: 10,
+          marginBottom: 20
         }}
       />
       <TextInput
@@ -56,17 +58,23 @@ const CreateTaskForm = () => {
         multiline
         numberOfLines={5}
         right={<TextInput.Icon name="text-short" />}
+        style={{
+          marginBottom: 20
+        }}
       />
-      <Checkbox.Item label="Urgent" status={formState.isUrgent ? "checked" : "unchecked"} onPress={() => setFormState({
-        ...formState,
-        isUrgent: !formState.isUrgent
-      })} />
-      <Checkbox.Item label="Important" status={formState.isImp ? "checked" : "unchecked"} onPress={() => setFormState({
-        ...formState,
-        isImp: !formState.isImp
-      })} />
-
-      <Button style={{backgroundColor: '#0377fc'}} mode="contained" onPress={createTask}>
+      <View style={{borderStyle: 'dashed',borderColor:'#00000',borderWidth: 1}}>
+        <Checkbox.Item label="Urgent" status={formState.isUrgent ? "checked" : "unchecked"} onPress={() => setFormState({
+          ...formState,
+          isUrgent: !formState.isUrgent
+        })} 
+        />
+        <Checkbox.Item label="Important" status={formState.isImp ? "checked" : "unchecked"} onPress={() => setFormState({
+          ...formState,
+          isImp: !formState.isImp
+        })} />
+      </View>
+      
+      <Button style={{backgroundColor: '#0377fc',marginTop: 25}} mode="contained" onPress={createTask}>
       {isLoading ? 'Creating...' :  'Create Task'}
     </Button>
     </View>
