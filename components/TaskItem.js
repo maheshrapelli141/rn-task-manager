@@ -1,30 +1,34 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Avatar, Button, List } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { markTaskAsCompletedAction } from '../redux/actions/task.actions';
 import ImportantBadge from './ImportantBadge';
 import UrgentBadge from './UrgentBadge';
 
-const TaskItem = ({ type }) => {
+const TaskItem = ({ type, name ,description, isImp,isUrgent,id }) => {
+  const dispatch = useDispatch();
+
   return (
     <List.Accordion
-      title="Accordion
-      1"
-      id="1"
+      title={name}
+      id={id || Math.random()}
       style={{ display: 'flex' }}
       // left={() =>   <Avatar.Text size={36} label="XD" />}
       right={() => <View>
-        <ImportantBadge /><UrgentBadge />
+        {isImp && <ImportantBadge />}
+        {isUrgent && <UrgentBadge />}
       </View>}
     >
       <List.Item
-        title="Deploy App"
-        description="Build and deploy task manager app by today"
+        title={name}
+        description={description}
       />
       {type === 'completed'
         ?
-        ''
+        null
         :
-        <Button icon="check" mode="outlined" onPress={() => console.log('Pressed')}>
+        <Button icon="check" mode="outlined" onPress={() => dispatch(markTaskAsCompletedAction(id))}>
           Mark as Complete
         </Button>}
 
