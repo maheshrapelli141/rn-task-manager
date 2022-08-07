@@ -1,10 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, Checkbox, Chip, Text, TextInput } from 'react-native-paper';
+import { Button, Checkbox, Chip, Divider, Text, TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { createTaskAction } from '../redux/actions/task.actions';
 
 const CreateTaskForm = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const initialState = {
     name: '',
@@ -23,10 +25,13 @@ const CreateTaskForm = () => {
     }));
     setLoading(false);
     setFormState(initialState);
+    navigation.navigate('To Do - Tasks');
   }
 
   return (
-    <View style={{padding: 10}}>
+    <View style={{padding: 20,marginTop: 50}}>
+      <Text style={{fontSize:24,marginBottom: 10}}>Add Task</Text>
+      <Divider />
       <TextInput
         label="Task Name"
         mode='outlined'
@@ -36,6 +41,9 @@ const CreateTaskForm = () => {
           name: text
         })}
         right={<TextInput.Icon name="pencil-outline" />}
+        style={{
+          marginTop: 10
+        }}
       />
       <TextInput
         label="Task Detail"

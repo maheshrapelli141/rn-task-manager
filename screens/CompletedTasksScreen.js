@@ -1,11 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { Button, List, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from '../components/TaskItem';
 import { deleteTaskAction } from '../redux/actions/task.actions';
+import NoCompleteTasks from '../assets/no-completed-tasks.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const CompletedTasksScreen = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const { tasks } = useSelector(state => state.tasks);
   
@@ -13,6 +16,21 @@ const CompletedTasksScreen = () => {
 
   function clearTasks(){
     completedTasks.map(task => dispatch(deleteTaskAction(task.id)))
+  }
+
+  function showClearAlert(){
+    return Alert.alert(
+      "Sure to remove all completed tasks",
+      "Click yes to remove",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log('canceld'),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () =>clearTasks()}
+      ]
+    );
   }
 
   return (
@@ -30,11 +48,15 @@ const CompletedTasksScreen = () => {
             type="completed"
           />)
         :
-        <Text>Not Finished any tasks yet!</Text>}
+        <View style={{marginTop: 100,justifyContent: 'center',display: 'flex',alignItems:'center',paddingTop: 18}}>
+          <Text style={{width:250,fontSize: 20,textAlign: 'center'}}>Finished tasks appear here!</Text>
+          <NoCompleteTasks width={160} height={200} style={{margin:50}}/>
+          <Button onPress={() => navigation.navigate('To Do - Tasks')}>Show Tasks</Button>
+        </View>}
       </List.AccordionGroup>
       {completedTasks.length
       ?
-      <Button onPress={() => clearTasks()}>Clear All</Button>
+      <Button onPress={() => showClearAlert()}>Clear All</Button>
     :
     null}
     </View>
