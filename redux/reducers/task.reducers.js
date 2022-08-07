@@ -21,6 +21,12 @@ const taskReducer = (state = initialState,action) => {
       return {
         ...state
       }
+    case TASKS_CONSTANTS.DELETE:
+      const index = state.tasks.findIndex(task => task.id === payload.id);
+      state.tasks.splice(index,1);
+      return {
+        ...state
+      }
     default: 
       return state;
   }

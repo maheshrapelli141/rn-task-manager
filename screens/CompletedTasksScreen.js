@@ -1,13 +1,20 @@
 import React from 'react';
 import { View } from 'react-native';
-import { List, Text } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { Button, List, Text } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from '../components/TaskItem';
+import { deleteTaskAction } from '../redux/actions/task.actions';
 
 const CompletedTasksScreen = () => {
+  const dispatch = useDispatch();
   const { tasks } = useSelector(state => state.tasks);
-  console.log({tasks});
+  
   const completedTasks = tasks.filter(task => task.isCompleted);
+
+  function clearTasks(){
+    completedTasks.map(task => dispatch(deleteTaskAction(task.id)))
+  }
+
   return (
     <View>
       <List.AccordionGroup>
@@ -25,6 +32,11 @@ const CompletedTasksScreen = () => {
         :
         <Text>Not Finished any tasks yet!</Text>}
       </List.AccordionGroup>
+      {completedTasks.length
+      ?
+      <Button onPress={() => clearTasks()}>Clear All</Button>
+    :
+    null}
     </View>
   );
 };

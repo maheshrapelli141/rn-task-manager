@@ -14,3 +14,8 @@ export const markTaskAsCompletedAction = (taskId) => ({
   type: TASKS_CONSTANTS.MARK_COMPLETE,
   payload: { id: taskId }
 });
+
+export const deleteTaskAction = (taskId) => ({
+  type: TASKS_CONSTANTS.DELETE,
+  payload: { id: taskId}
+})

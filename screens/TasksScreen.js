@@ -1,14 +1,27 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import { Divider, List, Text } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import { Button, Divider, List, Text } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import TaskItem from '../components/TaskItem';
+import { retriveData } from '../helpers/AsyncStorageHandler';
+import { setTasksAction } from '../redux/actions/task.actions';
 
 const TasksScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const { tasks } = useSelector(state => state.tasks);
   const pendingTasks = tasks.filter(task => !task.isCompleted);
+
+
+  useEffect(() => {
+    retriveData('tasks')
+      .then(data => {
+        const parsedData = JSON.parse(data);
+        dispatch(setTasksAction(parsedData && parsedData.tasks && parsedData.tasks.tasks || []))
+      });
+  },[]);
+
 
   return (
     <View>
