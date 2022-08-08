@@ -8,6 +8,8 @@ import BottomNavigator from './components/BottomNavigator';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
+import { pushImmediateNotification } from './helpers/notifications';
 
 // const Stack = createNativeStackNavigator();
 
@@ -49,6 +51,12 @@ export default function App() {
     TiroGurmukhi_Regular: require('./assets/fonts/TiroGurmukhi-Regular.ttf'),
     TiroGurmukhi_Italic: require('./assets/fonts/TiroGurmukhi-Italic.ttf'),
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      pushImmediateNotification();
+    },3000);
+  },[]);
   
   return (
     <Provider store={store}>
