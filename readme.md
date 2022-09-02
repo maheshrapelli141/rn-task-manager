@@ -10,3 +10,10 @@ The task manager app follows the Covey Time Management Matrix for setting priori
 <img src="https://user-images.githubusercontent.com/49057184/188124548-ec0926d9-fe01-44a9-aafd-6c0e589f60e6.jpg" width="200px"/>
 <img src="https://user-images.githubusercontent.com/49057184/188124551-9901174c-ee5a-4379-8f0f-7166f736f2e1.jpg" width="200px"/>
 </div>
+
+#### Tech used
+Expo
+MUi
+
+#### Compatible with
+Android
